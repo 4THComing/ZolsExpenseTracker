@@ -1,4 +1,4 @@
-/* using System;
+using System;
 using System.Collections.Generic;
 using ExpenseInterface.Models;
 using ExpenseInterface.Services;
@@ -8,8 +8,8 @@ namespace ExpenseInterface
 {
     class Program
     {
-        private ExpenseStore expenseStore;
-        private ExpenseManager expenseManager;
+        private  ExpenseStore expenseStore = new ExpenseStore();
+        private ExpenseManager expenseManager = new ExpenseManager();
 
         public static void Main(string[] args)
         {
@@ -19,9 +19,6 @@ namespace ExpenseInterface
 
         public void Run()
         {
-            expenseStore = new ExpenseStore();
-            expenseManager = new ExpenseManager();
-
             ShowMenu();
         }
 
@@ -130,7 +127,7 @@ namespace ExpenseInterface
                 {
                     Console.WriteLine("Invalid date, Please enter a valid date in the format YYYY-MM-DD");
                     Console.Write("4. Enter Expense Date: ");
-                    date = DateTime.Now.TryParse(Console.ReadLine(), out date) ? date : DateTime.Now;
+                    date = DateTime.TryParse(Console.ReadLine(), out date) ? date : DateTime.Now;
                 }
                 else
                 {
@@ -146,8 +143,14 @@ namespace ExpenseInterface
         {
             var expenses = expenseStore.GetExpenses();
 
-            if (expenses.IsNullOrEmpty()) 
-               Console.WriteLine("No expenses found.");
+            if (expenses.Any()) 
+            {
+                Console.WriteLine("Expenses found:");
+            }
+            else
+            {
+                Console.WriteLine("No expenses found.");
+            }
 
             foreach (var expense in expenses)
             {
@@ -156,4 +159,4 @@ namespace ExpenseInterface
         }
   }
 }
- */
+
