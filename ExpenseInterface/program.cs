@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ExpenseInterface.Models;
 using ExpenseInterface.Services;
 using ExpenseInterface.Storage;
@@ -31,8 +32,9 @@ namespace ExpenseInterface
                 Console.WriteLine("--Expense Tracker Menu--");
                 Console.WriteLine("1. Add Expense");
                 Console.WriteLine("2. View Expenses");
-                Console.WriteLine("3. View Total Expenses");  
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("3. View Total Expenses"); 
+                Console.WriteLine("4. Delete Expense"); 
+                Console.WriteLine("5. Exit");
 
                 Console.Write("Select an option: ");
                 var input = Console.ReadLine();
@@ -50,6 +52,9 @@ namespace ExpenseInterface
                        Console.WriteLine($"Total Expenses: {total:C}");
                        break;
                     case "4":
+                       DeleteExpenseFlow();
+                       break;   
+                    case "5":
                        Console.WriteLine("Exiting...");
                        running = false;
                        break;
@@ -62,22 +67,22 @@ namespace ExpenseInterface
 
         public void AddExpenseFlow()
         { 
-            var category = string.Empty;
-            var description = string.Empty;
-            var amount = 0.00;
-            var date = DateTime.Now;
-
+            string? category = string.Empty;
+            string? description = string.Empty;
+            double amount = 0.00;
+            DateTime date = DateTime.Now;
+                
             Console.Write("1. Enter Expense Category: ");
             category = Console.ReadLine();
             while (true)
             {
-                bool InvalidCategory = string.IsNullOrWhiteSpace(category);
+                bool InvalidCategory = string.IsNullOrWhiteSpace(category) || category.Any(char.IsDigit);
                 if (InvalidCategory)
                 {
                    Console.WriteLine("Category is required. Please enter a valid category.");
                    Console.Write("1. Enter Expense Category: ");
                    category = Console.ReadLine();
-                } 
+                }
                else
                {
                    break;
@@ -88,7 +93,7 @@ namespace ExpenseInterface
             description = Console.ReadLine();
             while (true)
             {
-                bool InvalidDescription = string.IsNullOrWhiteSpace(description);
+                bool InvalidDescription = string.IsNullOrWhiteSpace(description) || description.Any(char.IsDigit);
                 if (InvalidDescription)
                 {
                     Console.WriteLine("Description is required. Please enter a valid description.");
@@ -105,7 +110,7 @@ namespace ExpenseInterface
             amount = double.TryParse(Console.ReadLine(), out amount) ? amount : 0.00;
             while (true)
             {
-                bool InvalidAmount = amount <= 0;
+                bool InvalidAmount = amount <= 0 || amount.ToString().Any(char.IsLetter);
                 if (InvalidAmount)
                 {
                     Console.WriteLine("Invalid amount, Please enter a figure greater than 0.00");
@@ -118,7 +123,7 @@ namespace ExpenseInterface
                 }
             } 
 
-            Console.Write("4. Enter Expense Date: ");
+            Console.Write("5. Enter Expense Date: ");
             date = DateTime.TryParse(Console.ReadLine(), out date) ? date : DateTime.Now;
             while (true)
             {
@@ -126,7 +131,7 @@ namespace ExpenseInterface
                 if (InvalidDate)
                 {
                     Console.WriteLine("Invalid date, Please enter a valid date in the format YYYY-MM-DD");
-                    Console.Write("4. Enter Expense Date: ");
+                    Console.Write("5. Enter Expense Date: ");
                     date = DateTime.TryParse(Console.ReadLine(), out date) ? date : DateTime.Now;
                 }
                 else
@@ -155,6 +160,21 @@ namespace ExpenseInterface
             foreach (var expense in expenses)
             {
                 Console.WriteLine($"Category: {expense.Category}, Description: {expense.Description}, Amount: {expense.Amount:C}, Date: {expense.Date:yyyy-MM-dd}");
+            }
+        }
+        public void DeleteExpenseFlow()
+        {
+            Console.WriteLine("Enter the description of expense to be deleted: ");
+            string? description = Console.ReadLine();
+            var expenseToDelete = expenseStore.GetExpenses().FirstOrDefault(e => e.Description.Equals(description, StringComparison.OrdinalIgnoreCase));
+            if (expenseToDelete != null)
+            {
+                expenseStore.DeleteExpense(expenseToDelete);
+                Console.WriteLine("Expense deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Expense not found.");
             }
         }
   }

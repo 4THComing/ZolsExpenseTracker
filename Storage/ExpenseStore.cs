@@ -17,6 +17,15 @@ namespace ExpenseInterface.Storage
             expenses.Add(expense);
         }
 
+        public void DeleteExpense(Expense expense)
+        {
+            if (expense == null)
+            {
+                throw new ArgumentNullException(nameof(expense));
+            }
+            expenses.Remove(expense);
+        }
+
         public IEnumerable<Expense> GetExpenses()
         {
             return expenses;
