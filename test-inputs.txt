@@ -1,0 +1,24 @@
+1
+1
+Food
+Food
+Lunch
+12.50
+2026-05-22
+1
+2
+Transportation
+Transportation
+Bus fare
+2.75
+2026-05-21
+1
+3
+Utilities
+Utilities
+Stationery
+5.00
+2026-05-20
+2
+3
+5

@@ -8,7 +8,7 @@ namespace ExpenseInterface.Models
     public class Expense
     {
         [Required]
-        public string? Category { get; set; }
+        public CategorySelection Category { get; set; }
 
         [Required]
         public string? Description { get; set; }
@@ -18,14 +18,14 @@ namespace ExpenseInterface.Models
 
         public DateTime Date { get; set; }
 
-        public Expense(string? category, string? description, double amount, DateTime date)
+        public Expense(CategorySelection category, string? description, double amount, DateTime date)
         {
             Category = category;
             Description = description;
             Amount = amount;
             Date = date;
 
-            if (string.IsNullOrWhiteSpace(category))
+            if (category == default(CategorySelection))
                throw new ArgumentException("Category is required.");
             if (string.IsNullOrWhiteSpace(description))
                throw new ArgumentException("Description is required.");

@@ -21,7 +21,7 @@ namespace ExpenseInterface.Services
             var filteredExpenses = new List<Expense>();
             foreach (var expense in expenses)
             {
-                if (expense.Category == category)
+                if (expense.Category.ToString() == category)
                 {
                     filteredExpenses.Add(expense);
                 }

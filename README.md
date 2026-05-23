@@ -8,6 +8,13 @@ A console-based expense tracking application built with C# and .NET.
 - Calculate total expenses
 - Input validation
 
+## New Features
+- Category Filtering
+- Expense Categories
+- Delete Expense Feature
+- Expense Validation
+- Montly Expense Calculations
+
 ## Technologies
 - C#
 - .NET 10
@@ -19,8 +26,12 @@ A console-based expense tracking application built with C# and .NET.
 - Storage
 
 ## Future Improvements
-- Category filtering
 - Monthly reports
 - JSON file storage
 - Database integration
 - REST API support
+
+## Planned Versions
+- v2: Web API
+- v3: Mobile App (Flutter)
+- v4: SAP/Azure Integration
