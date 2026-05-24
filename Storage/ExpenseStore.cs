@@ -16,7 +16,7 @@ namespace ExpenseInterface.Storage
             }
             expenses.Add(expense);
         }
-
+      
         public void DeleteExpense(Expense expense)
         {
             if (expense == null)

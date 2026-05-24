@@ -47,7 +47,7 @@ namespace ExpenseInterface
                        ExpenseUI.AddExpenseFlow(expenseStore);
                        break;
                     case "2":
-                       ExpenseUI.UpdateExpenseFlow();
+                       ExpenseUI.UpdateExpenseFlow(expenseStore);
                        break;
                     case "3":
                        ExpenseUI.ViewExpenseFlow(expenseStore);
