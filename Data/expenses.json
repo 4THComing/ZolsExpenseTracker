@@ -1,0 +1,23 @@
+[
+  {
+    "Id": "eee1f0b0-7745-4479-ac9e-46a82467abe9",
+    "Category": 5,
+    "Description": "pills",
+    "Amount": 299.99,
+    "Date": "2026-05-28T00:00:00"
+  },
+  {
+    "Id": "8164e70b-b8a9-4061-9374-ddfaa3e45dd7",
+    "Category": 1,
+    "Description": "chips",
+    "Amount": 15,
+    "Date": "2026-05-28T00:00:00"
+  },
+  {
+    "Id": "26a58f75-69bb-4558-a8c9-a525900b6660",
+    "Category": 3,
+    "Description": "spoon",
+    "Amount": 34,
+    "Date": "2026-05-28T00:00:00"
+  }
+]

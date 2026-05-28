@@ -5,34 +5,41 @@ using ExpenseInterface;
 
 namespace ExpenseInterface.Models
 {
-    public class Expense
-    {
-        [Required]
-        public CategorySelection Category { get; set; }
+   public class Expense
+   {
+      public Guid Id { get; set; }
 
-        [Required]
-        public string? Description { get; set; }
+      [Required]
+      public CategorySelection Category { get; set; }
 
-        [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than Zero.")]
-        public double Amount { get; set; }
+      [Required]
+      public string? Description { get; set; }
 
-        public DateTime Date { get; set; }
+      [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than Zero.")]
+      public double Amount { get; set; }
 
-        public Expense(CategorySelection category, string? description, double amount, DateTime date)
-        {
-            Category = category;
-            Description = description;
-            Amount = amount;
-            Date = date;
+      public DateTime Date { get; set; }
 
-            if (category == default(CategorySelection))
-               throw new ArgumentException("Category is required.");
-            if (string.IsNullOrWhiteSpace(description))
-               throw new ArgumentException("Description is required.");
-            if (amount <= 0)
-               throw new ArgumentException("Amount must be higher than 0.00");
-            if (date == DateTime.MinValue)
-               throw new ArgumentException("Date is required.");
-        }
-    }
+      public Expense()
+      {
+
+      }
+      public Expense(CategorySelection category, string? description, double amount, DateTime date)
+      {
+         Id = Guid.NewGuid();
+         Category = category;
+         Description = description;
+         Amount = amount;
+         Date = date;
+
+         if (category == default(CategorySelection))
+            throw new ArgumentException("Category is required.");
+         if (string.IsNullOrWhiteSpace(description))
+            throw new ArgumentException("Description is required.");
+         if (amount <= 0)
+            throw new ArgumentException("Amount must be higher than 0.00");
+         if (date == DateTime.MinValue)
+            throw new ArgumentException("Date is required.");
+      }
+   }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExpenseInterface.Models;
+using ExpenseInterface.Storage;
 
 namespace ExpenseInterface.ProjectUI.Helper
 {
@@ -13,43 +14,43 @@ namespace ExpenseInterface.ProjectUI.Helper
             Console.WriteLine("Enter Valid Category from the following: \n1. Food \n2. Transportation \n3. Utilities \n4. Entertainment \n5. Healthcare \n6. Education \n7. Other");
             Console.Write("1. Enter Expense Category: ");
             var choice = Console.ReadLine();
-             while (true)
+            while (true)
             {
-            switch (choice)
-            {
-                case "1":
-                    newCategoryInput = CategorySelection.Food;
-                    break;
-                case "2":
-                    newCategoryInput = CategorySelection.Transportation;
-                    break;
-                case "3":
-                    newCategoryInput = CategorySelection.Utilities;
-                    break;
-                case "4":
-                    newCategoryInput = CategorySelection.Entertainment;
-                    break;
-                case "5":
-                    newCategoryInput = CategorySelection.Healthcare;
-                    break;
-                case "6":
-                    newCategoryInput = CategorySelection.Education;
-                    break;
-                case "7":
-                    newCategoryInput = CategorySelection.Other;
-                    break;    
-                default:
+                switch (choice)
+                {
+                    case "1":
+                        newCategoryInput = CategorySelection.Food;
+                        break;
+                    case "2":
+                        newCategoryInput = CategorySelection.Transportation;
+                        break;
+                    case "3":
+                        newCategoryInput = CategorySelection.Utilities;
+                        break;
+                    case "4":
+                        newCategoryInput = CategorySelection.Entertainment;
+                        break;
+                    case "5":
+                        newCategoryInput = CategorySelection.Healthcare;
+                        break;
+                    case "6":
+                        newCategoryInput = CategorySelection.Education;
+                        break;
+                    case "7":
+                        newCategoryInput = CategorySelection.Other;
+                        break;
+                    default:
                         newCategoryInput = CategorySelection.None;
                         Console.WriteLine("Invalid choice, Please select a valid category from the list.");
                         Console.Write("1. Enter Expense Category: ");
                         choice = Console.ReadLine();
                         continue;
+                }
+                return newCategoryInput;
             }
-            return newCategoryInput;
-            }    
         }
         public static string GetValidDescriptionInput()
-        { 
+        {
             Console.Write("2. Enter description: ");
             var newDescriptionInput = Console.ReadLine();
             while (string.IsNullOrWhiteSpace(newDescriptionInput) || newDescriptionInput.Any(char.IsDigit))
@@ -58,32 +59,32 @@ namespace ExpenseInterface.ProjectUI.Helper
                 Console.Write("2. Enter description: ");
                 newDescriptionInput = Console.ReadLine();
             }
-            // return valid input
             return newDescriptionInput;
-            
+
         }
 
-        public static double GetValidAmountInput( )
+        public static double GetValidAmountInput()
         {
             Console.Write("3. Enter amount: ");
             var newAmountInput = double.TryParse(Console.ReadLine(), out double amount) ? amount : 0.00;
             while (true)
             {
                 bool invalidAmount = newAmountInput <= 0;
-                
-                if (invalidAmount)
-                   {
-                      Console.WriteLine("Invalid amount, Please enter a figure greater than 0.00");
-                      Console.Write("3. Enter Expense Amount: ");
-                      newAmountInput = double.TryParse(Console.ReadLine(), out amount) ? amount : 0.00;
-                   }
-                else
-                   {
-                      break;
-                   }
 
-            } return newAmountInput;
-            
+                if (invalidAmount)
+                {
+                    Console.WriteLine("Invalid amount, Please enter a figure greater than 0.00");
+                    Console.Write("3. Enter Expense Amount: ");
+                    newAmountInput = double.TryParse(Console.ReadLine(), out amount) ? amount : 0.00;
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+            return newAmountInput;
+
         }
 
         public static DateTime GetValidDateInput()
@@ -96,6 +97,28 @@ namespace ExpenseInterface.ProjectUI.Helper
                 Console.Write("4. Enter date (yyyy-MM-dd): ");
             }
             return newDateInput;
+        }
+
+        public static int GetExpenseToDelete(int expenseCount)
+        {
+            Console.WriteLine("Enter the number of the expense you want to delete: ");
+            int expenseIndex;
+
+            while (true)
+            {
+                var expenseToDelete = Console.ReadLine();
+
+                if (expenseToDelete == null || !int.TryParse(expenseToDelete, out expenseIndex) || expenseIndex < 1 || expenseIndex > expenseCount)
+                {
+                    Console.WriteLine("Invalid expense number.");
+                    Console.Write("Enter the number of the expense you want to delete: ");
+                    continue;
+                }
+
+                break;
+            }
+
+            return expenseIndex;
         }
     }
 }
