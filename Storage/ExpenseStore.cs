@@ -11,6 +11,10 @@ namespace ExpenseInterface.Storage
         private readonly string filePath = "Data/expenses.json";
         private List<Expense> expenses = new List<Expense>();
 
+        public ExpenseStore()
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+        }
         public void LoadExpenses()
         {
             if (File.Exists(filePath))

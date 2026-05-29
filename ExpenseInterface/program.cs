@@ -35,9 +35,13 @@ namespace ExpenseInterface
             Console.WriteLine("1. Add Expense");
             Console.WriteLine("2. Update Expense");
             Console.WriteLine("3. View Expenses");
-            Console.WriteLine("4. View Total Expenses");
-            Console.WriteLine("5. Delete Expense");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("4. Filter Expenses by Category");
+            Console.WriteLine("5. Filter Expenses by Description");
+            Console.WriteLine("6. Filter Expenses by Date");
+            Console.WriteLine("7. Filter Expenses by Amount");
+            Console.WriteLine("8. View Total Expenses");
+            Console.WriteLine("9. Delete Expense");
+            Console.WriteLine("0. Exit");
 
             Console.Write("Select an option: ");
             var input = Console.ReadLine();
@@ -54,13 +58,25 @@ namespace ExpenseInterface
                   ExpenseUI.ViewExpenseFlow(expenseStore);
                   break;
                case "4":
+                  ExpenseUI.FilterExpensesByCategory(expenseStore);
+                  break;
+               case "5":
+                  ExpenseUI.FilterExpensesByDescription(expenseStore);
+                  break;   
+               case "6":
+                  ExpenseUI.FilterExpensesByDate(expenseStore);
+                  break;
+               case "7":
+                  ExpenseUI.FilterExpensesByAmount(expenseStore);
+                  break;     
+               case "8":
                   var total = expenseManager.GetTotalExpenses(expenseStore.GetExpenses());
                   Console.WriteLine($"Total Expenses: {total:C}");
                   break;
-               case "5":
+               case "9":
                   ExpenseUI.DeleteExpenseFlow(expenseStore);
                   break;
-               case "6":
+               case "0":
                   Console.WriteLine("Exiting...");
                   running = false;
                   break;

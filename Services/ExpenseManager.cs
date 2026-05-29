@@ -16,12 +16,64 @@ namespace ExpenseInterface.Services
             return total;
         }
 
-        public IEnumerable<Expense> FilterByCategory(string category, IEnumerable<Expense> expenses)
+        public IEnumerable<Expense> GetExpensesByCategory(CategorySelection category, IEnumerable<Expense> expenses)
         {
             var filteredExpenses = new List<Expense>();
             foreach (var expense in expenses)
             {
-                if (expense.Category.ToString() == category)
+                if (expense.Category == category)
+                {
+                    filteredExpenses.Add(expense);
+                }
+            }
+            return filteredExpenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesByDescription(string description, IEnumerable<Expense> expenses)
+        {
+             var filteredExpenses = new List<Expense>();
+            foreach (var expense in expenses)
+            {
+                if (expense.Description == description)
+                {
+                    filteredExpenses.Add(expense);
+                }
+            }
+            return filteredExpenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesByDate(DateTime date, IEnumerable<Expense> expenses)
+        {
+            var filteredExpenses = new List<Expense>();
+            foreach (var expense in expenses)
+            {
+                if (expense.Date.Date == date.Date)
+                {
+                    filteredExpenses.Add(expense);
+                }
+            }
+            return filteredExpenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesAboveAmount(double amount, IEnumerable<Expense> expenses)
+        {
+            var filteredExpenses = new List<Expense>();
+            foreach (var expense in expenses)
+            {
+                if (expense.Amount > amount)
+                {
+                    filteredExpenses.Add(expense);
+                }
+            }
+            return filteredExpenses;
+        }
+
+        public IEnumerable<Expense> GetExpensesBelowAmount(double amount, IEnumerable<Expense> expenses)
+        {
+            var filteredExpenses = new List<Expense>();
+            foreach (var expense in expenses)
+            {
+                if (expense.Amount < amount)
                 {
                     filteredExpenses.Add(expense);
                 }

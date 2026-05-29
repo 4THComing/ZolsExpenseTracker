@@ -10,6 +10,14 @@ namespace ExpenseInterface.ProjectUI
 {
     public class ExpenseUI
     {
+        public static void DisplayExpenses(IEnumerable<Expense> expenses)
+        {
+
+            foreach (var expense in expenses)
+            {
+                Console.WriteLine($"Category: ID {expense.Id} {expense.Category}, Description: {expense.Description}, Amount: {expense.Amount:C}, Date: {expense.Date:yyyy-MM-dd}");
+            }
+        }
         public static void AddExpenseFlow(ExpenseStore expenseStore)
         {
             CategorySelection category = InputHelper.GetValidCategoryInput();
@@ -104,9 +112,137 @@ namespace ExpenseInterface.ProjectUI
                 Console.WriteLine("No expenses found.");
             }
 
-            foreach (var expense in expenses)
+            DisplayExpenses(expenses);
+        }
+
+        public static void FilterExpensesByCategory(ExpenseStore expenseStore)
+        {
+            var expenses = expenseStore.GetExpenses();
+            if (!expenses.Any())
             {
-                Console.WriteLine($"Category: ID {expense.Id} {expense.Category}, Description: {expense.Description}, Amount: {expense.Amount:C}, Date: {expense.Date:yyyy-MM-dd}");
+                Console.WriteLine("No expenses found to filter.");
+                return;
+            }
+            Console.WriteLine("Select a category to filter by: ");
+
+            CategorySelection filteredCategory = InputHelper.GetValidCategoryInput();
+
+            var filteredExpenses = new ExpenseManager().GetExpensesByCategory(filteredCategory, expenses);
+
+            Console.WriteLine($"Expenses in category: {filteredCategory}: ");
+
+            if (!filteredExpenses.Any())
+            {
+                Console.WriteLine($"No expenses found in category {filteredCategory}.");
+                return;
+            }
+
+            DisplayExpenses(filteredExpenses);
+        }
+
+        public static void FilterExpensesByDescription(ExpenseStore expenseStore)
+        {
+            var expenses = expenseStore.GetExpenses();
+            if (!expenses.Any())
+            {
+                Console.WriteLine("No expenses found. ");
+                return;
+            }
+
+            Console.WriteLine("Select a description to filter by: ");
+
+            string filteredDescription = InputHelper.GetValidDescriptionInput();
+
+            var filteredExpenses = new ExpenseManager().GetExpensesByDescription(filteredDescription, expenses);
+
+            Console.WriteLine($"Expense in Description: {filteredDescription}");
+
+            if (!filteredExpenses.Any())
+            {
+                Console.WriteLine($"No expenses found in category {filteredDescription}.");
+                return;
+            }
+
+            DisplayExpenses(filteredExpenses);
+        }
+
+        public static void FilterExpensesByDate(ExpenseStore expenseStore)
+        {
+            var expenses = expenseStore.GetExpenses();
+            if (!expenses.Any())
+            {
+                Console.WriteLine("No expenses found to filter.");
+                return;
+            }
+            Console.WriteLine("Enter a date to filter by (yyyy-MM-dd): ");
+
+            DateTime filteredDate = InputHelper.GetValidDateInput();
+
+            var filteredExpenses = new ExpenseManager().GetExpensesByDate(filteredDate, expenses);
+
+            Console.WriteLine($"Expenses on date {filteredDate:yyyy-MM-dd}: ");
+
+            if (!filteredExpenses.Any())
+            {
+                Console.WriteLine($"No expenses found on date {filteredDate:yyyy-MM-dd}.");
+                return;
+            }
+
+            DisplayExpenses(filteredExpenses);
+        }
+
+        public static void FilterExpensesByAmount(ExpenseStore expenseStore)
+        {
+            var expenses = expenseStore.GetExpenses();
+            if (!expenses.Any())
+            {
+                Console.WriteLine("No expenses found to filter.");
+                return;
+            }
+            Console.WriteLine("Choose a filter option: 1. Filter by amount above 2. Filter by amount below");
+            var choice = Console.ReadLine();
+            while (choice != "1" && choice != "2")
+            {
+                Console.WriteLine("Invalid choice, Please select a valid filter option from the list.");
+                Console.WriteLine("Choose a filter option: 1. Filter by amount above 2. Filter by amount below");
+                choice = Console.ReadLine();
+            }
+
+            if (choice == "1")
+            {
+                Console.WriteLine("Choose to filter an amount above : ");
+
+                double filteredAmount = InputHelper.GetValidAmountInput();
+
+                var filteredExpenses = new ExpenseManager().GetExpensesAboveAmount(filteredAmount, expenses);
+
+                Console.WriteLine($"Expenses above {filteredAmount:C}: ");
+
+                if (!filteredExpenses.Any())
+                {
+                    Console.WriteLine($"No expenses found above {filteredAmount:C}.");
+                    return;
+                }
+
+                DisplayExpenses(filteredExpenses);
+            }
+            if (choice == "2")
+            {
+                Console.WriteLine("Choose to filter an amount below : ");
+
+                double filteredAmount = InputHelper.GetValidAmountInput();
+
+                var filteredExpenses = new ExpenseManager().GetExpensesBelowAmount(filteredAmount, expenses);
+
+                Console.WriteLine($"Expenses below {filteredAmount:C}: ");
+
+                if (!filteredExpenses.Any())
+                {
+                    Console.WriteLine($"No expenses found below {filteredAmount:C}.");
+                    return;
+                }
+
+                DisplayExpenses(filteredExpenses);
             }
         }
 

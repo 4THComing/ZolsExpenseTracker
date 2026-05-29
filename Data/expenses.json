@@ -19,5 +19,26 @@
     "Description": "spoon",
     "Amount": 34,
     "Date": "2026-05-28T00:00:00"
+  },
+  {
+    "Id": "8cf27ce2-0674-495b-a093-6ce6b6d30c2c",
+    "Category": 1,
+    "Description": "pie",
+    "Amount": 28,
+    "Date": "2026-05-29T00:00:00"
+  },
+  {
+    "Id": "27332797-9749-4321-a88a-ebf8c95265b7",
+    "Category": 6,
+    "Description": "books",
+    "Amount": 778.98,
+    "Date": "2026-05-29T00:00:00"
+  },
+  {
+    "Id": "aa528409-2b18-4628-8624-3d45baa0b42f",
+    "Category": 2,
+    "Description": "uber",
+    "Amount": 139,
+    "Date": "2026-05-29T00:00:00"
   }
 ]
