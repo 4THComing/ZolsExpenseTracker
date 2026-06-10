@@ -120,5 +120,29 @@ namespace ExpenseInterface.ProjectUI.Helper
 
             return expenseIndex;
         }
+
+        public static int GetValidMonthInput()
+        {
+            Console.Write("Enter month (1-12): ");
+            int month;
+            while (!int.TryParse(Console.ReadLine(), out month) || month < 1 || month > 12)
+            {
+                Console.WriteLine("Invalid month. Please enter a number between 1 and 12.");
+                Console.Write("Enter month (1-12): ");
+            }
+            return month;
+        }
+
+        public static int GetValidYearInput()
+        {
+            Console.Write("Enter year: ");
+            int year;
+            while (!int.TryParse(Console.ReadLine(), out year))
+            {
+                Console.WriteLine("Invalid year. Please enter a valid year.");
+                Console.Write("Enter year: ");
+            }
+            return year;
+        }
     }
 }

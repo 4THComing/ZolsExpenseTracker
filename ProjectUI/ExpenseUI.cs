@@ -115,6 +115,49 @@ namespace ExpenseInterface.ProjectUI
             DisplayExpenses(expenses);
         }
 
+        public static void ViewMonthlyExpensesFlow(ExpenseStore expenseStore)
+        {
+            var expenses = expenseStore.GetExpenses();
+            if (!expenses.Any())
+            {
+                Console.WriteLine("No expenses found to filter.");
+                return;
+            }
+
+            ExpenseManager expenseManager = new ExpenseManager();
+            
+            Console.WriteLine("Enter a month to view expenses for (1-12): ");
+            int month = InputHelper.GetValidMonthInput();
+            
+            Console.WriteLine("Enter a year to view expenses for: ");
+            int year = InputHelper.GetValidYearInput();
+            
+            var filteredExpenses = expenses.Where(e => e.Date.Month == month && e.Date.Year == year);
+             if (!filteredExpenses.Any())
+            {
+                Console.WriteLine($"No expenses found for {month}/{year}.");
+                return;
+            }
+             Console.WriteLine($"Expenses for {month}/{year}: ");
+             DisplayExpenses(filteredExpenses);
+            
+            var monthlyExpensesTotal = new ExpenseManager().GetMonthlyTotalExpenses(month, year, expenses);
+            var highestExpense = expenseManager.GetHighestExpense(filteredExpenses);
+            var lowestExpense = expenseManager.GetLowestExpense(filteredExpenses);
+            var averageExpense = expenseManager.GetAverageExpense(filteredExpenses);
+            Console.WriteLine($"Total expenses for {month}/{year}: {monthlyExpensesTotal:C}");
+            
+            Console.WriteLine("====== Monthly Expense Report ======");
+            Console.WriteLine($"Month: {month}");
+            Console.WriteLine($"Year: {year}");
+            Console.WriteLine($"Expenses found: {filteredExpenses.Count()}");
+            Console.WriteLine($"Total Expenses: {monthlyExpensesTotal:C}");
+            Console.WriteLine($"Highest Expense: {highestExpense:C}");
+            Console.WriteLine($"Lowest Expense: {lowestExpense:C}");
+            Console.WriteLine($"Average Expense: {averageExpense:C}");
+            Console.WriteLine("===================================");  
+        }
+
         public static void FilterExpensesByCategory(ExpenseStore expenseStore)
         {
             var expenses = expenseStore.GetExpenses();

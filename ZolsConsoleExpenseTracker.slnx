@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ExpenseInterface.Tests/ExpenseInterface.Tests.csproj" />
+  <Project Path="ZolsConsoleExpenseTracker.csproj" />
+</Solution>
