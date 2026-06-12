@@ -25,13 +25,13 @@ jobs:
       run: dotnet restore
 
     - name: Build solution
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ZolsConsoleExpenseTracker.csproj --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ExpenseInterface.Tests/ExpenseInterface.Tests.csproj --verbosity normal
 
     - name: Publish application
-      run: dotnet publish -c Release -o publish
+      run: dotnet publish ZolsConsoleExpenseTracker.csproj -c Release -o publish
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
