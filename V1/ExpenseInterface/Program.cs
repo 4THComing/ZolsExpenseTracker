@@ -63,7 +63,7 @@ namespace ExpenseInterface
                   break;
                case "5":
                   ExpenseUI.FilterExpensesByDescription(expenseStore);
-                  break;   
+                  break;
                case "6":
                   ExpenseUI.FilterExpensesByDate(expenseStore);
                   break;
@@ -72,7 +72,7 @@ namespace ExpenseInterface
                   break;
                case "8":
                   ExpenseUI.ViewMonthlyExpensesFlow(expenseStore);
-                  break;        
+                  break;
                case "9":
                   var total = expenseManager.GetTotalExpenses(expenseStore.GetExpenses());
                   Console.WriteLine($"Total Expenses: {total:C}");
