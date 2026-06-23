@@ -1,4 +1,4 @@
-using ExpenseInterface.Models;
+using ZolsExpenseTracker.Api.Models;
 
 public enum CategorySelection
 {

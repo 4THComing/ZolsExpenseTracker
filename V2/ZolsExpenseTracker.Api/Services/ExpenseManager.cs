@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using ExpenseInterface.Models;
+using ZolsExpenseTracker.Api.Models;
 using System.Linq;
 
-namespace ExpenseInterface.Services
+namespace ZolsExpenseTracker.Api.Services
 {
     public class ExpenseManager
     {

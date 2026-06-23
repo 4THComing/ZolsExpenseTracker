@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using ExpenseInterface;
+using ZolsExpenseTracker.Api;
 
-namespace ExpenseInterface.Models
+namespace ZolsExpenseTracker.Api.Models
 {
    public class Expense
    {

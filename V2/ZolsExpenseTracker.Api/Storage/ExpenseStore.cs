@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
-using ExpenseInterface.Models;
+using ZolsExpenseTracker.Api.Models;
 
-namespace ExpenseInterface.Storage
+namespace ZolsExpenseTracker.Api.Storage
 {
     public class ExpenseStore
     {
