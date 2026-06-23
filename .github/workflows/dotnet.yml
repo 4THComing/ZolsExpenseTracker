@@ -22,16 +22,16 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore V1/ZolsConsoleExpenseTracker.csproj
 
     - name: Build solution
-      run: dotnet build ZolsConsoleExpenseTracker.csproj --configuration Release --no-restore
+      run: dotnet build V1/ZolsConsoleExpenseTracker.csproj --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test ExpenseInterface.Tests/ExpenseInterface.Tests.csproj --verbosity normal
+      run: dotnet test V1/ExpenseInterface.Tests/ExpenseInterface.Tests.csproj --verbosity normal
 
     - name: Publish application
-      run: dotnet publish ZolsConsoleExpenseTracker.csproj -c Release -o publish
+      run: dotnet publish V1/ZolsConsoleExpenseTracker.csproj -c Release -o publish
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
