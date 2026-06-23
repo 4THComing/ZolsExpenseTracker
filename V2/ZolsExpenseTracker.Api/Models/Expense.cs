@@ -20,6 +20,8 @@ namespace ZolsExpenseTracker.Api.Models
 
       public DateTime Date { get; set; }
 
+      public bool IsExpense { get; set; }
+
       public Expense()
       {
 
