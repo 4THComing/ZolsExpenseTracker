@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ExpenseContext>(opt => 
+builder.Services.AddDbContext<ExpenseDbContext>(opt => 
     opt.UseInMemoryDatabase("ExpenseStore"));
 
 builder.Services.AddControllers();

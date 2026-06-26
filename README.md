@@ -1,214 +1,122 @@
-# Zols Console Expense Tracker
+# Zols Enterprise Expense Tracker Ecosystem
 
-A console-based expense tracking application built with C# and .NET that allows users to track, analyze, and manage expenses through a clean console interface.
+A multi-tiered financial management ecosystem built with C# and .NET 10. This project is structured as a modular monorepo that evolves from a local console application into a high-scale, cloud-integrated Open Banking Platform.
 
 ---
 
-## Features
+## Architectural Version Roadmap
+
+```text
+💡 Phase 1: Engine ──► 💡 Phase 2: Server ──► 💡 Phase 3: Open Banking Platform ──► 💡 Phase 4: Client ──► 💡 Phase 5: Enterprise
+   [.NET 10 Console]     [ASP.NET Core API]      [Stitch Open API]      [Flutter Mobile]      [SAP CPI / Azure]
+```
+
+### 🔹 V1.0 - Core Console Engine (Active)
+* **Objective**: Establish the core business logic, filtering engines, and mathematical validation rules.
+* **Features**: Manual expense entry, custom category mapping, comprehensive analytical reporting modules, and local JSON data persistence.
+
+### 🔹 V2.0 - ASP.NET Core Web API (In Development)
+* **Objective**: Migrate the engine to an independent backend server to serve multi-user application requests.
+* **Features**: Relational database migration via Entity Framework Core, structured Data Transfer Objects (DTOs), clean Controller routing, and automated OpenAPI (Swagger) contract documentation.
+
+### 🔹 V3.0 - Stitch Open Banking Integration (Planned)
+* **Objective**: Introduce real-time automated transaction tracking using native South African Open Banking Platform infrastructure.
+* **Features**: Secure OAuth 2.0 authorization flows, GraphQL transaction ledger queries, custom webhook receivers for instant card-swipe alerts, and automated Regex merchant descriptor cleansing.
+
+### 🔹 V4.0 - Cross-Platform Flutter Mobile Client (Planned)
+* **Objective**: Build a responsive visual interface to consume the unified backend APIs.
+* **Features**: Shared backend API client generation via OpenAPI utilities, secure localized token storage, and dynamic charting components for reporting dashboards.
+
+### 🔹 V5.0 - SAP CPI & Azure Cloud Integration (Planned)
+* **Objective**: Scale the platform into a secure, production-grade enterprise system.
+* **Features**: Cloud hosting on Azure App Services/Azure SQL, credential management via Azure Key Vault, API gateway controls through Azure APIM, and automated corporate expense synchronization iFlows built in SAP Cloud Platform Integration (CPI).
+
+---
+
+## Active V1 Engine Features
 
 ### Expense Management
-- Add expenses
-- View expenses
-- Delete expenses
-- Input validation
-- JSON data persistence
+* Add, view, and delete expenses
+* Rigorous data input validation rules
+* Persistent state management via local JSON storage
 
-### Categories
-- Food
-- Transportation
-- Entertainment
-- Utilities
-- Other
+### Categories Managed
+* None |Food | Transportation | Utilities | Entertainment | Healthcare | Education | Other
 
-### Analytics
-- Calculate total expenses
-- Highest expense reporting
-- Lowest expense reporting
-- Average expense reporting
-- Expense count reporting
-- Monthly expense totals
-- Monthly expense reports
-
-### Filtering & Search
-- Filter by category
-- Search by description
-- Filter by date
-- Filter by amount range
+### Analytics & Reporting
+* Comprehensive financial metric aggregation (Total, Average, Highest, and Lowest costs)
+* Granular search features (Filter by category, description keywords, date ranges, and cost parameters)
+* Automated localized monthly summary formatting
 
 ---
 
-## Testing
+## Testing & CI/CD Discipline
 
-This project includes automated unit testing using xUnit.
+High reliability is enforced at the core through automated validation pipelines.
 
-### Test Coverage
-- Total expense calculations
-- Average expense calculations
-- Highest expense retrieval
-- Lowest expense retrieval
-- Category filtering
-- Description filtering
-- Date filtering
-- Amount filtering
-- Monthly report calculations
-
-Current Status:
-
-✅ 11 Passing Tests
+* **Test Suite**: Driven by **xUnit** covering mathematical total aggregations, range boundaries, and filter matrices.
+* **Current Status**: ✅ **11 Passing Tests**
+* **CI/CD Pipeline**: Governed via **GitHub Actions** (`dotnet.yml`) to automatically execute dependency restoration, compilation verification, and continuous test runs on every code check-in.
 
 ---
 
-## CI/CD
-
-GitHub Actions automatically:
-
-- Restores dependencies
-- Builds the project
-- Runs all unit tests
-- Creates build artifacts
-
----
-
-## Screenshots
-
-### Main Menu
-
-![Main Menu](docs/images/main-menu.png)
-
-### Expense List
-
-![Expense List](docs/images/expenses-list.png)
-
-### Monthly Report
-
-![Monthly Report](docs/images/monthly-report.png)
-
----
-
-## Wireframes
-
-### Initial Design
-
-![Wireframe](docs/wireframes/expense-tracker-wireframe.png)
-
----
-
-## Architecture
-
-### Current Architecture
-
-```text
-Program
-   │
-   ▼
-ExpenseManager
-   │
-   ├── Expense
-   ├── Reports
-   └── Filters
-           │
-           ▼
-      JSON Storage
-```
-
----
-
-## Version Roadmap
-
-```text
-v1.0  Basic Expense Tracking
-   │
-   ▼
-v1.1  JSON Persistence
-   │
-   ▼
-v1.2  Categories
-   │
-   ▼
-v1.3  Delete Expenses
-   │
-   ▼
-v1.4  Filtering System
-   │
-   ▼
-v1.5  Reporting Features
-   │
-   ▼
-v1.6  Monthly Reports
-   │
-   ▼
-v1.7  Unit Testing + CI/CD
-   │
-   ▼
-v2.0  ASP.NET Web API
-   │
-   ▼
-v3.0  Flutter Mobile App
-   │
-   ▼
-v4.0  SAP + Azure Integration
-```
-
----
-
-## Technologies
-
-- C#
-- .NET 10
-- xUnit
-- JSON Persistence
-- Git
-- GitHub Actions
-- VS Code
-
----
-
-## Project Structure
+## Monorepo Project Layout
 
 ```text
 ZolsConsoleExpenseTracker
 │
-├── ExpenseInterface
-│   ├── Models
-│   ├── Services
-│   └── Storage
+├── .github/workflows/
+│   └── dotnet.yml            # CI/CD pipeline automation script
 │
-├── ExpenseInterface.Tests
+├── docs/                     
+│   ├── diagrams/             # Version roadmap architectures
+│   ├── images/               # Application runtime screenshots
+│   ├── wireframes/           # Initial UI visual mockups
+│   └── case-studies/         # Enterprise integration solution blueprints
 │
-├── Data
-│   └── expenses.json
+├── src/                      
+│   └── Zols.ExpenseTracker.V1.Console/
+│       ├── Data/             # Contains localized expenses.json
+│       ├── Models/           # Core structural entities (Expense.cs)
+│       ├── Services/         # Decoupled transaction logic components
+│       ├── Storage/          # Data reading and writing handlers
+│       └── Program.cs        # Console execution entry point
 │
-└── .github
-    └── workflows
+└── tests/                    
+    └── Zols.ExpenseTracker.V1.Tests/
+        └── UnitTest1.cs      # Core business logic validation suites
 ```
 
 ---
 
-## Future Improvements
+## Technology Stack & Ecosystem
 
-### v2
-- ASP.NET Core Web API
-- Swagger Documentation
-- Authentication
+* **Languages & Frameworks**: C# 10, .NET 10, Dart (Future), GraphQL (Future)
+* **Testing & Tools**: xUnit, Swashbuckle (Swagger), Git, VS Code, Visual Studio (`.slnx`)
+* **Infrastructure Target**: GitHub Actions, Azure Cloud Platform, SAP Integration Suite (CPI), Stitch Open Banking API
 
-### v3
-- Flutter Mobile Application
-- Shared Backend API
-- Mobile Reporting Dashboard
+---
 
-### v4
-- Azure Deployment
-- SAP Integration Suite
-- Enterprise Reporting
+## Visual Assets
+
+### Main Menu
+![Main Menu](docs/images/main-menu.png)
+
+### Expense List
+![Expense List](docs/images/expenses-list.png)
+
+### Monthly Report
+![Monthly Report](docs/images/monthly-report.png)
+
+### Architecture Wireframe
+![Wireframe](docs/wireframes/expense-tracker-wireframe.png)
 
 ---
 
 ## Author
 
-Zolani Mjikeliso
+**Zolani Mjikeliso** 
+SELF-TAUGHT DEVELOPER 
+*Building skills in Clean Architecture, Full-Stack .NET Development, Azure Cloud Services, and SAP Enterprise Integration.*
 
-Building toward:
-- SAP Integration
-- Azure Development
-- Flutter Mobile Development
-- Clean Architecture
+* [LinkedIn Profile](https://www.linkedin.com/in/zolani-mjikeliso-89b039213)

@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ZolsExpenseTracker.Api.Models;
 
-    public class ExpenseContext : DbContext
+    public class ExpenseDbContext : DbContext
     {
-        public ExpenseContext(DbContextOptions<ExpenseContext> options)
+        public ExpenseDbContext(DbContextOptions<ExpenseDbContext> options)
             : base(options)
         {
         }

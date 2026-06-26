@@ -8,9 +8,9 @@ namespace ZolsExpenseTracker.Controllers;
 [ApiController]
 public class ExpenseController : ControllerBase
 {
-    private readonly ExpenseContext _context;
+    private readonly ExpenseDbContext _context;
 
-    public ExpenseController(ExpenseContext context)
+    public ExpenseController(ExpenseDbContext context)
     {
         _context = context;
     }
