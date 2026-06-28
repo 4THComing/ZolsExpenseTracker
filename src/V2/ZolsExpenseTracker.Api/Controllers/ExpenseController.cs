@@ -32,6 +32,19 @@ public class ExpenseController : ControllerBase
             .ToListAsync();
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ExpenseDTO>> GetExpenseById(Guid id)
+    {
+        var expense = await _context.Expenses.FindAsync(id);
+
+        if (expense == null)
+        {
+            return NotFound();
+        }
+
+        return ExpenseToDTO(expense);
+    }
+
     private static ExpenseDTO ExpenseToDTO(Expense expense) => 
       new ExpenseDTO
     {

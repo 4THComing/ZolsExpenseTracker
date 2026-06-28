@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ZolsConsoleExpenseTracker.csproj" />
+    <ProjectReference Include="..\..\src\V1\ZolsConsoleExpenseTracker.csproj" />
   </ItemGroup>
 
 </Project>
