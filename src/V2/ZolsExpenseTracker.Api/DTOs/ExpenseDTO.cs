@@ -7,4 +7,5 @@ public class ExpenseDTO
     public CategorySelection category { get; set; }
 
     public bool IsExpense { get; set; }
+
 }   
