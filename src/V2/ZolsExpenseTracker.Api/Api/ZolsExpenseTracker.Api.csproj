@@ -18,6 +18,5 @@
     <Compile Include="..\Infrastructure\Data\**\*.cs"/>
     <Compile Include="..\Infrastructure\Repositories\**\*.cs"/>
   </ItemGroup>
-  </ItemGroup>
 
 </Project>

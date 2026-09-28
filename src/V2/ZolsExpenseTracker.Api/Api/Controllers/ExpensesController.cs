@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZolsExpenseTracker.Api.DTOs.Expenses;
 using ZolsExpenseTracker.Api.Models;
+using ZolsExpenseTracker.Api.Infrastructure.Data;
 using ZolsExpenseTracker.Api.Infrastructure.Repositories;
 
 namespace ZolsExpenseTracker.Api.Controllers;

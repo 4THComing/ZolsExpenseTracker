@@ -1,4 +1,5 @@
 using ZolsExpenseTracker.Api.Models;
+using ZolsExpenseTracker.Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 

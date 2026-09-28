@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using ZolsExpenseTracker.Api.Models;
+using V2.ZolsExpenseTracker.Api.Infrastructure.Data;
+/* using ZolsExpenseTracker.Api.Models;
 using ZolsExpenseTracker.Api.Controllers;
-using ZolsExpenseTracker.Api.DTOs.Expenses;
+using ZolsExpenseTracker.Api.DTOs.Expenses; */
 using Microsoft.AspNetCore.Mvc;
 
 namespace V2.ZolsExpenseTracker.Api.Tests
