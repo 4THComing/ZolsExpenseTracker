@@ -11,5 +11,6 @@ namespace ZolsExpenseTracker.Api.Infrastructure.Data;
         }
 
         public DbSet<Expense> Expenses => Set<Expense>();
+        public DbSet<VendorProfile> VendorProfiles => Set<VendorProfile>();
     }
 
