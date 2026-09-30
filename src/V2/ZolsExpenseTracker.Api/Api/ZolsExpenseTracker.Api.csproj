@@ -14,9 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Core\Models\**\*.cs"/>
-    <Compile Include="..\Infrastructure\Data\**\*.cs"/>
-    <Compile Include="..\Infrastructure\Repositories\**\*.cs"/>
+    <ProjectReference Include="..\..\Core\Core.csproj" />  
   </ItemGroup>
 
 </Project>

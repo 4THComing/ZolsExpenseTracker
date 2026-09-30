@@ -1,5 +1,5 @@
+using ZolsExpenseTracker.Core.Enums;
 using System.ComponentModel.DataAnnotations;
-using ZolsExpenseTracker.Api.DTOs.Expenses;
 
 public class ExpenseAnnotations
 {

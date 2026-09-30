@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ZolsExpenseTracker.Api.DTOs.Expenses;
-using ZolsExpenseTracker.Api.Models;
+using ZolsExpenseTracker.Core.Models;
+using ZolsExpenseTracker.Core.Interfaces;
 using ZolsExpenseTracker.Api.Infrastructure.Data;
-using ZolsExpenseTracker.Api.Infrastructure.Repositories;
 
 namespace ZolsExpenseTracker.Api.Controllers;
 
@@ -21,15 +21,23 @@ public class ExpenseController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ExpenseDTO>>> GetAllExpensesAsync()
+    public async Task<ActionResult<List<ExpenseDTO>>> GetAllAsync()
     {
-        return await _expenseRepository.GetAllExpensesAsync();
+        var expenses = await _expenseRepository.GetAllAsync();
+        var dtos = expenses.Select(e => new ExpenseDTO
+        {
+            Id = e.Id,
+            Description = e.Description,
+            Amount = e.Amount,
+            Category = e.Category
+        }).ToList();
+        return Ok(dtos);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ExpenseDTO>> GetExpenseByIdAsync(Guid id)
+    public async Task<ActionResult<ExpenseDTO>> GetByIdAsync(Guid id)
     {
-        var expense = await _expenseRepository.GetExpenseByIdAsync(id);
+        var expense = await _expenseRepository.GetByIdAsync(id);
 
         if (expense == null)
         {
@@ -41,7 +49,7 @@ public class ExpenseController : ControllerBase
 
     [HttpPut("{id}")]
 
-    public async Task<IActionResult> UpdateExpense(Guid id, UpdateExpenseDTO updateExpenseDTO)
+    public async Task<IActionResult> UpdateAsync(Guid id, UpdateExpenseDTO updateExpenseDTO)
     {
         if (id != updateExpenseDTO.Id)
         {
@@ -58,7 +66,6 @@ public class ExpenseController : ControllerBase
         expense.Description = updateExpenseDTO.Description;
         expense.Amount = updateExpenseDTO.Amount;
         expense.Date = updateExpenseDTO.Date;
-        expense.IsExpense = updateExpenseDTO.IsExpense;
 
         try
         {
@@ -73,28 +80,27 @@ public class ExpenseController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ExpenseDTO>> AddExpense(CreateExpenseDTO createExpenseDTO)
+    public async Task<ActionResult<ExpenseDTO>> AddAsync(CreateExpenseDTO createExpenseDTO)
     {
         var expense = new Expense
         {
             Category = createExpenseDTO.Category,
             Description = createExpenseDTO.Description,
             Amount = createExpenseDTO.Amount,
-            Date = createExpenseDTO.Date,
-            IsExpense = createExpenseDTO.IsExpense
+            Date = createExpenseDTO.Date
         };
 
         _context.Expenses.Add(expense);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(
-            nameof(GetExpenseByIdAsync),
+            nameof(GetByIdAsync),
             new { id = expense.Id },
             ExpenseToDTO(expense));
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteExpense(Guid id)
+    public async Task<ActionResult> DeleteAsync(Guid id)
     {
         var expense = await _context.Expenses.FindAsync(id);
         if (expense == null)
@@ -120,7 +126,6 @@ public class ExpenseController : ControllerBase
           Category = expense.Category,
           Description = expense.Description,
           Amount = expense.Amount,
-          Date = expense.Date,
-          IsExpense = expense.IsExpense
+          Date = expense.Date
       };
 }

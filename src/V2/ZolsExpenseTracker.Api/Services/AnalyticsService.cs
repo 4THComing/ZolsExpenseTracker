@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ZolsExpenseTracker.Api.Services
 {
-    public class ExpenseManager
+    public class AnalyticsService
     {
         public double GetTotalExpenses(IEnumerable<Expense> expenses)
         {

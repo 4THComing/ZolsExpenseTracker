@@ -1,4 +1,4 @@
-using ZolsExpenseTracker.Api.Models;
+namespace ZolsExpenseTracker.Core.Enums;
 
 public enum CategorySelection
 {

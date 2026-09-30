@@ -1,30 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using ExpenseInterface;
 
-namespace ExpenseInterface.Models
+namespace Zols.ExpenseTracker.V1.Console.Models
 {
    public class Expense
    {
       public Guid Id { get; set; }
 
-      [Required]
       public CategorySelection Category { get; set; }
 
-      [Required]
       public string? Description { get; set; }
 
-      [Range(0.01, double.MaxValue, ErrorMessage = "Amount must be greater than Zero.")]
-      public double Amount { get; set; }
+      [Range(0.01, 99999999.99, ErrorMessage = "Amount must be greater than Zero.")]
+      public decimal Amount { get; set; }
 
-      public DateTime Date { get; set; }
+      public DateTime Date { get; set; } = DateTime.UtcNow;
 
       public Expense()
       {
 
       }
-      public Expense(CategorySelection category, string? description, double amount, DateTime date)
+      public Expense(CategorySelection category, string? description, decimal amount, DateTime date)
       {
          Id = Guid.NewGuid();
          Category = category;
