@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ZolsExpenseTracker.Api.DTOs.Auth
 {
-    public class UserLoginDto
+    public class CreateUserDTO
     {
         [Required]
         public string Username { get; set; } = string.Empty;
@@ -11,6 +11,9 @@ namespace ZolsExpenseTracker.Api.DTOs.Auth
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string Password { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
+
+        [Required]
+        public string Role { get; set; } = "User";
     }
 }

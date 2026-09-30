@@ -37,5 +37,6 @@ public class VendorProfileController : ControllerBase
     {
         await _repo.DeleteAsync(id);
         return NoContent();
+        
     }
 }
